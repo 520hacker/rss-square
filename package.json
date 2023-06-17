@@ -1,0 +1,69 @@
+{
+  "name": "rss-square",
+  "version": "1.0.0",
+  "private": true,
+  "description": "its a rss square and load data from rss-json api.",
+  "author": {
+    "name": "odin luo"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "element-plus": "^2.3.6",
+    "vue": "^3.2.13"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "_id": "rss-square@1.0.0",
+  "bugs": {
+    "url": "https://github.com/520hacker/rss-square/issues"
+  },
+  "homepage": "https://github.com/520hacker/rss-square#readme",
+  "keywords": [
+    "rss",
+    "square",
+    "rss",
+    "json",
+    "memos",
+    "rss"
+  ],
+  "license": "MIT",
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/520hacker/rss-square.git"
+  }
+}

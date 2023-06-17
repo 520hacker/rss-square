@@ -36,6 +36,7 @@ RSS 广场是一个纯前端的工程，用于结合[RSS2JSON](https://github.co
 
 ## UI元素规划
 
+- AppView
 - Components
   - PageHeader
     - SettingIcon
@@ -44,12 +45,10 @@ RSS 广场是一个纯前端的工程，用于结合[RSS2JSON](https://github.co
     - LogoButton
   - LeftMenu
   - CardList
+  - AuthorList
   - RssCard
-- Views
-  - HomeView
-  - AuthorsView
-  - AboutView
-  - SettingView
+  - AboutCard
+  - SettingCard
 - Menu
   - Setting
     - Password Setting
@@ -64,3 +63,29 @@ RSS 广场是一个纯前端的工程，用于结合[RSS2JSON](https://github.co
 # rss-square
 
 RSS square is used to display users' subscribed RSS, which is gathered on a page to present the latest content.
+
+
+# rss-square
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
