@@ -3,12 +3,12 @@
         <div class="navbar-wrapper">
             <div class="header-container">
                 <div class="logo-container">
-                    <div class="logo-container" data-v-0baf1018=""><a href="/#" data-v-0baf1018=""><img class="logo"
-                                src="https://element-plus.org/images/element-plus-logo.svg" alt="Element Plus Logo"
-                                data-v-0baf1018=""></a></div>
+                    <div class="logo-container"><a href="/#"><img class="logo"
+                                src="https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18014611.png?x-oss-process=image/resize,h_28,w_114"
+                                alt="Memos RSS square Logo"></a></div>
                 </div>
-                <div class="content" data-v-0baf1018="">
-                    <div id="docsearch" class="algolia-search-box search" data-v-0baf1018=""><button type="button"
+                <div class="content">
+                    <div id="docsearch" class="algolia-search-box search"><button type="button"
                             class="DocSearch DocSearch-Button" aria-label="Search"><span
                                 class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon"
                                     viewBox="0 0 20 20">
@@ -24,7 +24,7 @@
                                             stroke-width="1.2" stroke="currentColor" fill="none" stroke-linecap="square">
                                         </path>
                                     </svg></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button></div>
-                    <nav class="navbar-menu menu" data-v-0baf1018=""><!--[-->
+                    <nav class="navbar-menu menu"><!--[-->
                         <a class="link-item link is-menu-link active"
                             href="/zh-CN/guide/design"><!--[--><!--[-->指南<!--]--><!--]--><!----></a>
                         <a class="link-item link is-menu-link"
@@ -49,8 +49,8 @@
                             </div>
                         </button></div>
                     <button class="reset-btn menu-hamburger hamburger" aria-label="移动端导航" aria-expanded="false"
-                        aria-controls="full-screen" data-v-0baf1018=""><span class="hamburger-1"></span><span
-                            class="hamburger-2"></span><span class="hamburger-3"></span></button>
+                        aria-controls="full-screen"><span class="hamburger-1"></span><span class="hamburger-2"></span><span
+                            class="hamburger-3"></span></button>
                 </div>
             </div>
 
@@ -135,7 +135,9 @@ header {
     user-select: none
 }
 
-.DocSearch-Button:active,.DocSearch-Button:focus,.DocSearch-Button:hover {
+.DocSearch-Button:active,
+.DocSearch-Button:focus,
+.DocSearch-Button:hover {
     background: var(--docsearch-searchbox-focus-background);
     box-shadow: var(--docsearch-searchbox-shadow);
     color: var(--docsearch-text-color);
@@ -207,12 +209,14 @@ header {
 .navbar-menu {
     display: none;
 }
+
 .el-icon {
     cursor: pointer
 }
 
-.dark-icon,.light-icon {
-    transition: color var(--el-transition-duration),opacity var(--el-transition-duration)
+.dark-icon,
+.light-icon {
+    transition: color var(--el-transition-duration), opacity var(--el-transition-duration)
 }
 
 .light-icon {
@@ -240,7 +244,7 @@ header {
 .theme-toggler-content {
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: border-color var(--el-transition-duration),background-color var(--el-transition-duration-fast);
+    transition: border-color var(--el-transition-duration), background-color var(--el-transition-duration-fast);
     background-color: transparent;
     display: none;
     border-radius: 50%;
@@ -255,6 +259,7 @@ button.reset-btn {
     margin: 0;
     cursor: pointer;
 }
+
 .dark {
     --bg-color-rgb: 0, 0, 0;
     --bg-color-soft: #242424;
@@ -277,7 +282,7 @@ button.reset-btn {
     box-sizing: border-box;
     background: var(--bg-color-mute);
     cursor: pointer;
-    transition: border-color var(--el-transition-duration),background-color var(--el-transition-duration)
+    transition: border-color var(--el-transition-duration), background-color var(--el-transition-duration)
 }
 
 .switch:hover {
@@ -292,7 +297,7 @@ button.reset-btn {
     background-color: var(--bg-color);
     transform: translate(0);
     color: var(--text-color-light);
-    transition: border-color var(--el-transition-duration),background-color var(--el-transition-duration),transform var(--el-transition-duration)
+    transition: border-color var(--el-transition-duration), background-color var(--el-transition-duration), transform var(--el-transition-duration)
 }
 
 .dark .switch__action {
@@ -309,7 +314,8 @@ button.reset-btn {
     bottom: 1px
 }
 
-.switch__action,.switch__icon {
+.switch__action,
+.switch__icon {
     width: 16px;
     height: 16px
 }
@@ -318,7 +324,7 @@ button.reset-btn {
     outline: -webkit-focus-ring-color auto 1px;
     outline-offset: 1px
 }
- 
+
 .menu-hamburger {
     width: 20px;
     display: flex;
@@ -359,7 +365,7 @@ button.reset-btn {
 .menu-hamburger.active .hamburger-3 {
     transform-origin: bottom;
     width: 50%;
-    transform: translate(2px,-10px) rotate(45deg)
+    transform: translate(2px, -10px) rotate(45deg)
 }
 
 @media (max-width: 749px) {
@@ -523,5 +529,4 @@ button.reset-btn {
     .navbar-wrapper .header-container {
         max-width: calc(var(--vp-screen-max-width));
     }
-}
-</style>
+}</style>

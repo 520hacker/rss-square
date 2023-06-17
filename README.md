@@ -4,6 +4,8 @@ RSS 广场是一个纯前端的工程，用于结合[RSS2JSON](https://github.co
 
 本广场将支持您以Docker方式部署，参数化退出地址和RSS2JSON地址，支持反向代理RSS2JSON地址。
 
+![](https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18014611.png)
+
 ----
 
 ## 页面元素规划
