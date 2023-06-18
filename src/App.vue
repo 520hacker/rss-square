@@ -1,15 +1,22 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <PageHeader msg="Welcome to RSS Square App" />
+  <main id="page-content" class="page-content doc-content-wrapper">
+    <AuthorList msg="Welcome to RSS Square App" />
+    <CardList msg="Welcome to RSS Square App" />
+  </main>
 </template>
 
 <script>
 import PageHeader from './components/PageHeader.vue'
+import AuthorList from './components/AuthorList.vue'
+import CardList from './components/CardList.vue'
 
 export default {
   name: 'App',
   components: {
-    PageHeader
+    PageHeader,
+    AuthorList,
+    CardList
   }
 }
 </script>
@@ -246,5 +253,39 @@ body {
   --code-tooltip-color: var(--brand-color);
   --purple-color: #9065db;
   --purple-color-light: #6222c2;
+}
+
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4,
+.page-content h5,
+.page-content h6 {
+  display: flex;
+  align-items: center;
+  position: relative;
+  color: var(--el-text-color-regular);
+}
+
+h1 {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.9rem;
+  color: var(--text-color);
+}
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+    margin-top: 0;
+}
+
+@media screen and (min-width: 480px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+}
+.doc-content-wrapper {
+    --vp-content-width: 800px;
+    padding: 32px 24px 96px;
 }
 </style>
