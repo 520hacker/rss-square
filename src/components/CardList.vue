@@ -2,11 +2,15 @@
     <div class="card-list">
         <h1>更新</h1>
         <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="grid custom-loading-svg"
-            v-loading="loading" :element-loading-svg="svg" element-loading-svg-view-box="-10, -10, 50, 50">
+            v-loading="loading" :element-loading-svg="svg" element-loading-svg-view-box="-10, -10, 50, 50"
+            v-infinite-scroll="load">
             <div v-masonry-tile class="item box" v-for="item in blocks" v-bind:key="item.id">
                 <div class="image" v-if="item.image != null">
-                    <img :src="item.image" onerror="this.style.display='none'" />
+                    <el-image :src="item.image" :zoom-rate="1.2" :preview-src-list="item.images" :initial-index="4" fit="cover"
+                        onerror="this.style.display='none'" />
+                    <!-- <img :src="item.image" onerror="this.style.display='none'" /> -->
                 </div>
+                <div class="author">{{ item.author }}</div>
                 <div class="description" v-html="item.description"></div>
                 <div class="action-bar">
                     <DateInfo :pubDate="item.pubDate" />
@@ -19,6 +23,7 @@
                 </div>
             </div>
         </div>
+        <div v-show="loading" class="loading_bar">加载中...</div>
     </div>
 </template>
   
@@ -34,43 +39,53 @@ export default {
         return {
             loading: true,
             blocks: [],
+            page: 0,
         }
     },
     created() {
-        axios.get('https://rsssquare.qiangtu.com/api/rss', {
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
-        })
-            .then(response => {
-                this.blocks = response.data.rss_list;
-                for (var item in this.blocks) {
-                    this.blocks[item].image = null;
-                    if (this.blocks[item].enclosure != "[]") {
-                        try {
-                            var enclosure = JSON.parse(this.blocks[item].enclosure);
-                            console.log(enclosure);
-                            for (let i = 0; i < enclosure.length; i++) {
-                                if (enclosure[i].type.startsWith("image")) {
-                                    this.blocks[item].image = enclosure[i].href;
-                                    break;
-                                }
-                            }
-                        }
-                        catch
-                        {
-                            console.log("get image error");
-                        }
-                    }
-                }
-                this.loading = false;
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        this.load();
     },
     props: {
         // msg: String
+    },
+    methods: {
+        load() {
+            this.page = this.page + 1;
+            this.loading = true;
+            axios.get('https://rsssquare.qiangtu.com/api/rss?page=' + this.page, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+                .then(response => {
+                    var list = response.data.rss_list;
+                    for (var item in list) {
+                        list[item].image = null;
+                        list[item].images = [];
+                        if (list[item].enclosure != "[]") {
+                            try {
+                                var enclosure = JSON.parse(list[item].enclosure);
+                                console.log(enclosure);
+                                for (let i = 0; i < enclosure.length; i++) {
+                                    if (enclosure[i].type.startsWith("image")) {
+                                        list[item].image = enclosure[i].href;
+                                        list[item].images.push(enclosure[i].href)
+                                    }
+                                }
+                            }
+                            catch
+                            {
+                                console.log("get image error");
+                            }
+                        }
+                    }
+                    this.blocks = this.blocks.concat(list);
+                    this.loading = false;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
     }
 }
 </script>
@@ -110,6 +125,13 @@ export default {
     text-overflow: ellipsis;
 }
 
+.box .author {
+    padding: 10px 0 0 15px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #409eff;
+}
+
 .box .description {
     width: 100%;
     max-height: 240px;
@@ -122,6 +144,7 @@ export default {
 .box .description img {
     max-width: 95%;
     text-align: center;
+    display: none;
 }
 
 .action-bar {
@@ -154,10 +177,38 @@ export default {
     font-size: 12px;
 }
 
-@media screen and (max-width: 540px) {
+.card-list .box {
+    width: 100%;
+    margin: 0 0 10px 0;
+}
+
+.loading_bar {
+    display: block;
+    clear: both;
+    color: #999;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+}
+
+@media screen and (min-width: 600px) {
     .card-list .box {
-        width: 100%;
-        margin: 0 0 10px 0;
+        width: 47%;
+        margin: 10px 1.5% 10px 1.4%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .card-list .box {
+        width: 31%;
+        margin: 0 10px 10px 10px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .card-list .box {
+        margin: 0 10px 20px 10px;
+        width: 254px;
     }
 }
 </style>
