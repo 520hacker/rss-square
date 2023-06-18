@@ -1,6 +1,9 @@
 <template>
   <PageHeader msg="Welcome to RSS Square App" />
-  <main id="page-content" class="page-content doc-content-wrapper">
+  <el-icon :size="size" :color="color">
+      <Edit />
+    </el-icon>
+    <main id="page-content" class="page-content doc-content-wrapper">
     <AuthorList msg="Welcome to RSS Square App" />
     <CardList msg="Welcome to RSS Square App" />
   </main>
@@ -287,5 +290,13 @@ h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, 
 .doc-content-wrapper {
     --vp-content-width: 800px;
     padding: 32px 24px 96px;
+}
+
+.date-changed {
+    float: left;
+    padding-left: 10px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #666;
 }
 </style>

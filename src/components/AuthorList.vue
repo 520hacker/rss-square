@@ -1,6 +1,6 @@
 <template>
     <div class="author-list">
-        <h1>创作者</h1>
+        <h1>主席团</h1>
         <div class="author-list-wrapper user-list custom-loading-svg" v-loading="loading" :element-loading-svg="svg"
             element-loading-svg-view-box="-10, -10, 50, 50">
             <div v-for="author in authors" v-bind:key="author.id" class="user-card">
@@ -17,7 +17,6 @@
   
 <script>
 import axios from 'axios';
-// import { ref } from 'vue';
 export default {
     name: 'AuthorList',
     data() {
@@ -106,8 +105,7 @@ export default {
     max-width: 50px;
 }
 
-
-.description {
+.author-list .description {
     margin-top: 0px;
     font-size: 12px;
     color: #888;
