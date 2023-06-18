@@ -1,7 +1,8 @@
 <template>
     <div class="card-list">
         <h1>更新</h1>
-        <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="grid">
+        <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="grid custom-loading-svg"
+            v-loading="loading" :element-loading-svg="svg" element-loading-svg-view-box="-10, -10, 50, 50">
             <div v-masonry-tile class="item box" v-for="item in blocks" v-bind:key="item.id">
                 <div class="image" v-if="item.image != null">
                     <img :src="item.image" onerror="this.style.display='none'" />
@@ -31,6 +32,7 @@ export default {
     },
     data() {
         return {
+            loading: true,
             blocks: [],
         }
     },
@@ -157,4 +159,5 @@ export default {
         width: 100%;
         margin: 0 0 10px 0;
     }
-}</style>
+}
+</style>
