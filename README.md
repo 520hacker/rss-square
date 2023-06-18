@@ -8,6 +8,16 @@ RSS 广场是一个纯前端的工程，用于结合[RSS2JSON](https://github.co
 
 ----
 
+## 部署例子 
+
+请不要因为页面简陋而懊恼，因为工程还远远没有完成。
+
+- [rss-square (qiangtu.com)](https://rsssquare.qiangtu.com/)
+
+----
+
+
+
 ## 页面元素规划
 
 本页面是一个单页的前端web APP程序，目前仅规划用于桌面和手机端呈现。

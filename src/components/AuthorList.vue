@@ -36,7 +36,7 @@ export default {
         }
     },
     created() {
-        axios.get('https://2504.qiangtu.com:8087/author', {
+        axios.get('https://rsssquare.qiangtu.com/api/author', {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
