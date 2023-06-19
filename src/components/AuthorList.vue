@@ -6,7 +6,8 @@
             <div v-for="author in authors" v-bind:key="author.id" class="user-card">
                 <div class="avatar">
                     <a :href="author.link" target="_blank">
-                        <img :src="author.avatar" :alt="author.description" />
+                        <img :src="author.avatar" :alt="author.description"
+                            onerror="this.src='https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18110103.png?x-oss-process=image/resize,h_50,w_50'" />
                     </a>
                 </div>
                 <a class="username" :href="author.link" target="_blank">{{ author.title }}</a>
