@@ -8,7 +8,6 @@
                 <div class="image" v-if="item.image != null">
                     <el-image :src="item.image" :zoom-rate="1.2" :preview-src-list="item.images" :initial-index="4" fit="cover"
                         onerror="this.style.display='none'" />
-                    <!-- <img :src="item.image" onerror="this.style.display='none'" /> -->
                 </div>
                 <div class="author">{{ item.author }}</div>
                 <div class="description" v-html="item.description"></div>
@@ -209,6 +208,13 @@ export default {
     .card-list .box {
         margin: 0 10px 20px 10px;
         width: 254px;
+    }
+}
+
+@media screen and (min-width: 1900px) {
+    .card-list .box {
+        margin: 0 10px 20px 10px;
+        width: 288px;
     }
 }
 </style>
