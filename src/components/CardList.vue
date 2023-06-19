@@ -1,13 +1,15 @@
 <template>
     <div class="card-list">
-        <h1>更新</h1>
+        <h1>更新 <span class="filter-from" v-show="searchRss != null" v-on:click="removeFilterFrom">来自: {{ searchRss? searchRss.title : ""
+        }}</span>
+        </h1>
         <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="grid custom-loading-svg"
             v-loading="loading" :element-loading-svg="svg" element-loading-svg-view-box="-10, -10, 50, 50"
             v-infinite-scroll="load">
             <div v-masonry-tile class="item box" v-for="item in blocks" v-bind:key="item.id">
                 <div class="image" v-if="item.image != null">
-                    <el-image :src="item.image" :zoom-rate="1.2" :preview-src-list="item.images" :initial-index="4" fit="cover"
-                        onerror="this.style.display='none'" />
+                    <el-image :src="item.image" :zoom-rate="1.2" :preview-src-list="item.images" :initial-index="4"
+                        fit="cover" onerror="this.style.display='none'" />
                 </div>
                 <div class="author">{{ item.author }}</div>
                 <div class="description" v-html="item.description"></div>
@@ -23,35 +25,54 @@
             </div>
         </div>
         <div v-show="loading" class="loading_bar">加载中...</div>
+        <!-- <el-dialog v-model="dialogVisible" title="Tips" width="30%" destroy-on-close>
+            <span>This is a message</span>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="dialogVisible = false">Cancel</el-button>
+                    <el-button type="primary" @click="dialogVisible = false">
+                        Confirm
+                    </el-button>
+                </span>
+            </template>
+        </el-dialog> -->
     </div>
 </template>
   
 <script>
+import { inject, ref } from 'vue';
 import axios from 'axios';
-import DateInfo from './DateInfo.vue'
+import DateInfo from './DateInfo.vue';
+
 export default {
     name: 'CardList',
     components: {
         DateInfo
     },
-    data() {
-        return {
-            loading: true,
-            blocks: [],
-            page: 0,
-        }
-    },
-    created() {
-        this.load();
-    },
     props: {
         // msg: String
     },
-    methods: {
-        load() {
-            this.page = this.page + 1;
-            this.loading = true;
-            axios.get('https://rsssquare.qiangtu.com/api/rss?page=' + this.page, {
+    setup() {
+        const sharedState = inject('sharedState');
+        const dialogVisible = ref(false);
+        const loading = ref(false);
+        const blocks = ref([]);
+        const page = ref(0);
+        const searchRss = ref(null);
+
+        const handleClose = () => {
+            dialogVisible.value = false;
+        };
+
+        const load = () => {
+            if (loading.value) {
+                return;
+            }
+
+            page.value = page.value + 1;
+            loading.value = true;
+            var rssUrl = searchRss.value == null ? "" : searchRss.value.rss;
+            axios.get('https://rsssquare.qiangtu.com/api/rss?source=' + rssUrl + '&page=' + page.value, {
                 headers: {
                     'Access-Control-Allow-Origin': '*'
                 }
@@ -72,23 +93,70 @@ export default {
                                     }
                                 }
                             }
-                            catch
-                            {
+                            catch {
                                 console.log("get image error");
                             }
                         }
                     }
-                    this.blocks = this.blocks.concat(list);
-                    this.loading = false;
+                    blocks.value = blocks.value.concat(list);
+                    loading.value = false;
                 })
                 .catch(error => {
                     console.error(error);
                 });
-        }
+        };
+
+        const doSearch = (author, keyword) => {
+            page.value = 0;
+            searchRss.value = author;
+            blocks.value = [];
+            load();
+            if (keyword != '')
+                console.log(keyword);
+        };
+
+        sharedState.triggerSearch = doSearch;
+
+        const removeFilterFrom = () => {
+            if (searchRss.value == null) {
+                return;
+            }
+
+            page.value = 0;
+            searchRss.value = null;
+            blocks.value = [];
+            load();
+        };
+
+        return {
+            dialogVisible,
+            loading,
+            blocks,
+            page,
+            handleClose,
+            load,
+            sharedState,
+            searchRss,
+            removeFilterFrom
+        };
     }
 }
+
 </script>
 <style>
+.card-list {
+    padding-top: 20px;
+}
+
+h1 span.filter-from {
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 23px;
+    font-weight: 100;
+    text-decoration: line-through;
+}
+
 .box {
     float: left;
     margin: 0 10px 20px 10px;
@@ -110,6 +178,10 @@ export default {
     align-items: center;
     max-width: 100%;
     border-radius: 5px 5px 0 0;
+}
+
+.box .el-image__error {
+    display: none;
 }
 
 .box .title {

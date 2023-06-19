@@ -1,11 +1,9 @@
 <template>
   <PageHeader msg="Welcome to RSS Square App" />
-  <el-icon :size="size" :color="color">
-      <Edit />
-    </el-icon>
-    <main id="page-content" class="page-content doc-content-wrapper">
+  <div>{{ searchKey }}</div>
+  <main id="page-content" class="page-content doc-content-wrapper">
     <AuthorList msg="Welcome to RSS Square App" />
-    <CardList msg="Welcome to RSS Square App" />
+    <CardList :msg="searchKey" />
   </main>
 </template>
 
@@ -13,6 +11,7 @@
 import PageHeader from './components/PageHeader.vue'
 import AuthorList from './components/AuthorList.vue'
 import CardList from './components/CardList.vue'
+import { provide, reactive  } from 'vue';
 
 export default {
   name: 'App',
@@ -20,6 +19,19 @@ export default {
     PageHeader,
     AuthorList,
     CardList
+  },
+
+  setup() {
+    // const searchKey = ref('none');
+    // provide('searchKey', searchKey);
+    const sharedState = reactive({
+      triggerSearch: null
+    });
+    provide('sharedState', sharedState);
+    return {
+      // searchKey,
+      sharedState
+    };
   }
 }
 </script>
@@ -277,8 +289,13 @@ h1 {
   color: var(--text-color);
 }
 
-h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
-    margin-top: 0;
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-top: 0;
 }
 
 @media screen and (min-width: 480px) {
@@ -287,16 +304,17 @@ h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, 
   }
 
 }
+
 .doc-content-wrapper {
-    --vp-content-width: 800px;
-    padding: 32px 24px 96px;
+  --vp-content-width: 800px;
+  padding: 32px 24px 96px;
 }
 
 .date-changed {
-    float: left;
-    padding-left: 10px;
-    margin-top: 12px;
-    font-size: 12px;
-    color: #666;
+  float: left;
+  padding-left: 10px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #666;
 }
 </style>

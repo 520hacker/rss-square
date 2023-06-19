@@ -24,10 +24,14 @@ export default {
         dayjs.locale('zh-cn')
         // // 拿来就用
         // dayjs('1999-01-01').fromNow() // 22 年前
-        console.log(this.pubDate)
+        // console.log(this.pubDate)
         const timestamp = this.pubDate; // 替换为您的时间戳数据
-        const formatted = dayjs(new Date(timestamp * 1000)).fromNow();
+        let formatted = dayjs(new Date(timestamp * 1000)).fromNow();
         this.formattedTime = formatted;
+        setInterval(() => {
+            formatted = dayjs(new Date(timestamp * 1000)).fromNow();
+            this.formattedTime = formatted;
+        }, 10000);
     },
     // setup() {
     //     const formattedTime = ref('');
@@ -49,5 +53,4 @@ export default {
 };
 </script>
   
-<style>
-</style>
+<style></style>

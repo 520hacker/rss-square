@@ -5,10 +5,15 @@
             element-loading-svg-view-box="-10, -10, 50, 50">
             <div v-for="author in authors" v-bind:key="author.id" class="user-card">
                 <div class="avatar">
-                    <a :href="author.link" target="_blank">
-                        <img :src="author.avatar" :alt="author.description"
-                            onerror="this.src='https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18110103.png?x-oss-process=image/resize,h_50,w_50'" />
-                    </a>
+                    <!-- <a :href="author.link" target="_blank"> -->
+                        <el-tooltip :content="author.title" raw-content>
+                            <img :src="author.avatar"
+                                v-on:click="triggerSearch(author)"
+                                :alt="author.title"
+                                onerror="this.src='https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18110103.png?x-oss-process=image/resize,h_50,w_50'" />
+
+                        </el-tooltip> 
+                    <!-- </a> -->
                 </div>
                 <a class="username" :href="author.link" target="_blank">{{ author.title }}</a>
             </div>
@@ -18,6 +23,7 @@
   
 <script>
 import axios from 'axios';
+import { inject } from 'vue';
 export default {
     name: 'AuthorList',
     data() {
@@ -53,6 +59,19 @@ export default {
     },
     props: {
         // msg: String
+    },
+    setup() { 
+        const sharedState = inject('sharedState');
+
+        // 触发组件B的方法C
+        const triggerSearch = (author) => { 
+            sharedState.triggerSearch(author,"");
+        };
+        return {
+            // injectedMessage,
+            // updateMessage,
+            triggerSearch
+        };
     }
 }
 </script>
@@ -68,7 +87,7 @@ export default {
 }
 
 .user-card {
-    width: 75px;
+    width: 65px;
     padding: 5px;
     margin: 5px;
     text-align: center;
@@ -77,6 +96,7 @@ export default {
 }
 
 .avatar:hover {
+    cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -104,6 +124,9 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     max-width: 50px;
+    display: none;
+    text-overflow: ellipsis;
+    text-align: center;
 }
 
 .author-list .description {
