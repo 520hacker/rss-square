@@ -33,14 +33,11 @@
                             </span>
                         </button>
                     </div>
-                    <!-- <nav class="navbar-menu menu">
-                        <a class="link-item link is-menu-link active"
-                            href="#/zh-CN/guide/design">指南</a>
-                        <a class="link-item link is-menu-link"
-                            href="#/zh-CN/component/button">组件</a>
-                        <a class="link-item link is-menu-link"
-                            href="#/zh-CN/resource/index">资源</a>
-                    </nav> -->
+                    <nav class="navbar-menu menu">
+                        <a class="link-item link is-menu-link active" href="#">广场</a>
+                        <a class="link-item link is-menu-link" href="https://memos.qiangtu.com/" target="_blank">Memos</a>
+                        <a class="link-item link is-menu-link" href="https://chatgpt.qiangtu.com/" target="_blank">GPT</a>
+                    </nav>
                     <div class="theme-toggler-content theme-toggler">
                         <button class="switch" role="switch" aria-label="切换暗色主题" aria-checked="false"
                             v-on:click="toggleDarkMode">
@@ -464,16 +461,20 @@ button.reset-btn {
         display: none;
     }
 }
+
 .social-links {
     height: 24px;
     padding: 0 12px;
 }
-.social-links .el-icon{
+
+.social-links .el-icon {
     color: #333;
 }
-.dark .social-links .el-icon{
+
+.dark .social-links .el-icon {
     color: #fff;
 }
+
 .link-item[data-v-36735cb0] {
     display: flex;
     align-items: center
@@ -583,4 +584,5 @@ button.reset-btn {
     .navbar-wrapper .header-container {
         max-width: calc(var(--vp-screen-max-width));
     }
-}</style>
+}
+</style>
