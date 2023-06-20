@@ -6,6 +6,8 @@ RSS 广场是一个纯前端的工程，用于结合[RSS2JSON](https://github.co
 
 ![](https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18014611.png)
 
+PS: 本程序主要代码由GPT创建和从element plus官网抄, 有bug是正常的，反馈请联系https://t.me/Odinluo
+
 ----
 
 ## 部署例子 
