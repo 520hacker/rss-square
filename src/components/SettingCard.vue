@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div class="setting-card"></div>
 </template>
   
 <script>
