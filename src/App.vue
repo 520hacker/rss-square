@@ -1,5 +1,6 @@
 <template>
   <PageHeader msg="Welcome to RSS Square App" />
+  <PageMenu />
   <div>{{ searchKey }}</div>
   <main id="page-content" class="page-content doc-content-wrapper">
     <AuthorList msg="Welcome to RSS Square App" />
@@ -9,27 +10,30 @@
 
 <script>
 import PageHeader from './components/PageHeader.vue'
+import PageMenu from './components/PageMenu.vue'
 import AuthorList from './components/AuthorList.vue'
 import CardList from './components/CardList.vue'
-import { provide, reactive  } from 'vue';
+import { provide, reactive } from 'vue';
 
 export default {
   name: 'App',
   components: {
     PageHeader,
+    PageMenu,
     AuthorList,
     CardList
   },
 
   setup() {
+    // const isOverlayShow = ref(false);
     // const searchKey = ref('none');
-    // provide('searchKey', searchKey);
+    // provide('showOverlay', isOverlayShow);
     const sharedState = reactive({
       triggerSearch: null
     });
     provide('sharedState', sharedState);
     return {
-      // searchKey,
+      // isOverlayShow,
       sharedState
     };
   }
@@ -316,5 +320,27 @@ h6:first-child {
   margin-top: 12px;
   font-size: 12px;
   color: #666;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .6);
+  transition: opacity .5s;
+  z-index: var(--overlay-z-index);
 }
 </style>
