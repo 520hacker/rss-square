@@ -1,6 +1,5 @@
 {
-    "rewrites": [
-      { "source": "/api/(.*)", "destination": "/vercel-proxy.js" }
-    ]
+  "routes": [
+    { "src": "/api/rss/.*", "dest": "https://2504.qiangtu.com:8087"}
+  ]
 }
-  
