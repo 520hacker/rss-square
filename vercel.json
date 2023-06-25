@@ -1,12 +1,12 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/rss/:match*",
-      "destination": "${RSS_API_HOST}/:match*"
+      "src": "/api/rss/(.*)",
+      "dest": "${RSS_API_HOST}/$1"
     },
     {
-      "source": "/api/memos/:match*",
-      "destination": "${MEMOS_API_HOST}/api/:match*"
+      "src": "/api/memos/(.*)",
+      "dest": "${MEMOS_API_HOST}/api/$1"
     }
   ]
 }
