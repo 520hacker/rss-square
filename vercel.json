@@ -1,7 +1,7 @@
 {
   "functions": {
     "proxy": {
-      "handler": "/vercel_proxy.js"
+      "handler": "api/proxy.js"
     }
   },
   "rewrites": [
