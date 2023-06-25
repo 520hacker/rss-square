@@ -12,12 +12,12 @@ module.exports = function (app) {
         })
     );
     app.use(
-        '/memos/',
+        '/api/memos/',
         createProxyMiddleware({
             target: process.env.MEMOS_API_HOST,
             changeOrigin: true,
             pathRewrite: {
-                '^/api/memos/': '/',
+                '^/api/memos/': '/api',
             }
         })
     );
