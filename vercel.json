@@ -5,8 +5,12 @@
   },
   "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/vercel-proxy.js"
+      "src": "/api/rss/(.*)",
+      "dest": "https://2504.qiangtu.com:8087/$1"
+    },
+    {
+      "src": "/api/memos/(.*)",
+      "dest": "https://2504.qiangtu.com:5231/api/$1"
     }
   ]
 }
