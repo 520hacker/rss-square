@@ -65,7 +65,7 @@ export default {
             page.value = page.value + 1;
             loading.value = true;
             var rssUrl = searchRss.value == null ? "" : searchRss.value.rss;
-            axios.get('/api/rss?source=' + rssUrl + '&page=' + page.value, {
+            axios.get('/api/rss/rss?source=' + rssUrl + '&page=' + page.value, {
                 headers: {
                     'Access-Control-Allow-Origin': '*'
                 }

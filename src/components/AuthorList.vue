@@ -56,7 +56,7 @@ export default {
         }
     },
     created() {
-        axios.get('/api/author', {
+        axios.get('/api/rss/author', {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }

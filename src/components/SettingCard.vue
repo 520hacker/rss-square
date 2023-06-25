@@ -10,10 +10,10 @@
                 </div>
                 <div class="example">
                     <el-form :model="form" label-width="120px">
-                        <el-form-item label="MEMOS API">
-                            <el-input v-model="form.memos_api" />
+                        <el-form-item label="MEMOS KEY">
+                            <el-input v-model="form.memos_key" />
                         </el-form-item>
-                        <el-form-item label="订阅管理KEY">
+                        <el-form-item label="RSS KEY">
                             <el-input v-model="form.square_key" />
                         </el-form-item>
                         <el-form-item>
@@ -47,7 +47,7 @@ export default {
     setup() {
         const changeDisplayView = inject('changeDisplayView');
         const form = reactive({
-            memos_api: '',
+            memos_key: '',
             square_key: ''
             // region: '',
             // date1: '',
@@ -62,14 +62,12 @@ export default {
             if (json && json.length > 0 && json != undefined && json != 'undefined') {
                 // console.log(json);
                 let data = JSON.parse(json);
-                form.memos_api = data.memos_api;
+                form.memos_key = data.memos_key;
                 form.square_key = data.square_key;
             }
         };
         onLoad();
         const onSubmit = () => {
-            console.log(JSON.stringify(form))
-            console.log(form)
             localStorage.setItem("setting", JSON.stringify(form));
 
             ElMessageBox({

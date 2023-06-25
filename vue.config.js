@@ -4,13 +4,20 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     proxy: {
-      '/api/': {
-        target: 'https://2504.qiangtu.com:8087/',
+      '/api/rss/': {
+        target: process.env.RSS_API_HOST,
         changeOrigin: true,
         pathRewrite: {
-          '^/api/': ''
+          '^/api/rss': ''
         }
-      }
+      },
+      '/api/memos/': {
+        target: process.env.MEMOS_API_HOST,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/memos': ''
+        }
+      },
     }
   }
 })
