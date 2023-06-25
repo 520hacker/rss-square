@@ -8,11 +8,5 @@
       "source": "/api/(.*)",
       "destination": "/vercel-proxy.js"
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/vercel-proxy.js"
-    }
   ]
 }
