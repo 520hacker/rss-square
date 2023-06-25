@@ -1,6 +1,12 @@
 {
+  "env": {
+    "RSS_API_HOST": "",
+    "MEMOS_API_HOST": ""
+  },
   "routes": [
-    { "src": "/api/rss/(.*)", "dest": "${process.env.RSS_API_HOST}/$1" },
-    { "src": "/api/memos/(.*)", "dest": "${process.env.MEMOS_API_HOST}/api/$1" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/vercel-proxy.js"
+    }
   ]
 }
