@@ -1,17 +1,8 @@
 {
-  "functions": {
-    "proxy": {
-      "handler": "api/proxy.js"
-    }
-  },
   "rewrites": [
     {
-      "source": "/api/rss/:path*",
-      "destination": "/api/proxy?url=/api/rss/:path*"
-    },
-    {
-      "source": "/api/memos/:path*",
-      "destination": "/api/proxy?url=/api/memos/:path*"
+      "source": "/api/(.*)",
+      "destination": "/api/proxy"
     }
   ]
 }
