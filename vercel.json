@@ -1,12 +1,17 @@
 {
-  "routes": [
+  "functions": {
+    "proxy": {
+      "handler": "api/proxy.js"
+    }
+  },
+  "rewrites": [
     {
-      "src": "/api/rss/(.*)",
-      "dest": "https://2504.qiangtu.com:8087/$1"
+      "source": "/api/rss/:path*",
+      "destination": "/api/proxy?url=/api/rss/:path*"
     },
     {
-      "src": "/api/memos/(.*)",
-      "dest": "https://2504.qiangtu.com:5231/api/$1"
+      "source": "/api/memos/:path*",
+      "destination": "/api/proxy?url=/api/memos/:path*"
     }
   ]
 }
