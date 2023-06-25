@@ -1,12 +1,12 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/rss/:match*",
-      "destination": "${process.env.RSS_API_HOST}/:match*"
+      "src": "/api/rss/(.*)",
+      "dest": "https://2504.qiangtu.com:8087/$1"
     },
     {
-      "source": "/api/memos/:match*",
-      "destination": "${process.env.MEMOS_API_HOST}/api/:match*"
+      "src": "/api/memos/(.*)",
+      "dest": "https://2504.qiangtu.com:5231/api/$1"
     }
   ]
 }
