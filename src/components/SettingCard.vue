@@ -48,19 +48,11 @@ export default {
         const changeDisplayView = inject('changeDisplayView');
         const form = reactive({
             memos_key: '',
-            square_key: ''
-            // region: '',
-            // date1: '',
-            // date2: '',
-            // delivery: false,
-            // type: [],
-            // resource: '',
-            // desc: '',
+            square_key: '' 
         })
         const onLoad = () => {
             let json = localStorage.getItem("setting");
-            if (json && json.length > 0 && json != undefined && json != 'undefined') {
-                // console.log(json);
+            if (json && json.length > 0 && json != undefined && json != 'undefined') { 
                 let data = JSON.parse(json);
                 form.memos_key = data.memos_key;
                 form.square_key = data.square_key;

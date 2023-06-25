@@ -17,7 +17,7 @@ export default function (app) {
             target: process.env.MEMOS_API_HOST,
             changeOrigin: true,
             pathRewrite: {
-                '^/api/memos/': '/api',
+                '^/api/memos/': '/api/',
             }
         })
     );
