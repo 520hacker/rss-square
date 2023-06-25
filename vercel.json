@@ -1,16 +1,12 @@
 {
-  "env": {
-    "RSS_API_HOST": "",
-    "MEMOS_API_HOST": ""
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/rss/(.*)",
-      "dest": "https://2504.qiangtu.com:8087/$1"
+      "source": "/api/rss/(.*)",
+      "destination": "${RSS_API_HOST}/$1"
     },
     {
-      "src": "/api/memos/(.*)",
-      "dest": "https://2504.qiangtu.com:5231/api/$1"
+      "source": "/api/memos/(.*)",
+      "destination": "${MEMOS_API_HOST}/api/$1"
     }
   ]
 }
