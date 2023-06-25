@@ -1,5 +1,5 @@
 {
   "routes": [
-    { "src": "/api/rss/.*", "dest": "https://2504.qiangtu.com:8087"}
+    { "src": "/api/rss/(.*)", "dest": "https://2504.qiangtu.com:8087/$1"}
   ]
 }
