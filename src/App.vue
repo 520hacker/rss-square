@@ -1,10 +1,11 @@
 <template>
   <PageHeader msg="Welcome to RSS Square App" />
+  <!-- <div>{{ searchKey }}</div> -->
   <PageMenu />
-  <div>{{ searchKey }}</div>
-  <main id="page-content" class="page-content doc-content-wrapper">
-    <AuthorList msg="Welcome to RSS Square App" />
-    <CardList :msg="searchKey" />
+  <main id="page-content" :class="displaySideMenu ? 'page-content ' : 'page-content has-sidebar'">
+    <SettingCard v-show="displayView == 'SettingCard'" />
+    <AuthorList msg="Welcome to RSS Square App" v-show="displayView == 'CardList'" />
+    <CardList :msg="searchKey" v-show="displayView == 'CardList'" />
   </main>
 </template>
 
@@ -13,7 +14,8 @@ import PageHeader from './components/PageHeader.vue'
 import PageMenu from './components/PageMenu.vue'
 import AuthorList from './components/AuthorList.vue'
 import CardList from './components/CardList.vue'
-import { provide, reactive } from 'vue';
+import SettingCard from './components/SettingCard.vue'
+import { provide, reactive, ref } from 'vue';
 
 export default {
   name: 'App',
@@ -21,10 +23,13 @@ export default {
     PageHeader,
     PageMenu,
     AuthorList,
-    CardList
+    CardList,
+    SettingCard
   },
 
   setup() {
+    const displaySideMenu = ref(false)
+    const displayView = ref('CardList');
     // const isOverlayShow = ref(false);
     // const searchKey = ref('none');
     // provide('showOverlay', isOverlayShow);
@@ -32,9 +37,18 @@ export default {
       triggerSearch: null
     });
     provide('sharedState', sharedState);
+    provide('displaySideMenu', displaySideMenu);
+
+    // const changeDisplayView = reactive({
+    //   displayView: null
+    // });
+    provide('changeDisplayView', displayView);
     return {
+      displaySideMenu,
+      displayView,
       // isOverlayShow,
-      sharedState
+      sharedState,
+      // changeDisplayView
     };
   }
 }
@@ -314,6 +328,28 @@ h6:first-child {
   padding: 32px 24px 96px;
 }
 
+@media screen and (min-width: 768px) {
+  .doc-content-wrapper {
+    padding: 48px 32px 42px;
+  }
+
+}
+
+@media screen and (min-width: 960px) {
+
+  .doc-content-wrapper {
+    padding: 64px 64px 42px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+
+  .doc-content-wrapper {
+    padding: 64px 0 42px 64px;
+    display: flex;
+  }
+}
+
 .date-changed {
   float: left;
   padding-left: 10px;
@@ -342,5 +378,70 @@ textarea {
   background: rgba(0, 0, 0, .6);
   transition: opacity .5s;
   z-index: var(--overlay-z-index);
+}
+
+
+.toc-wrapper {
+  display: none;
+  padding-left: 64px;
+}
+
+.page-content {
+  outline: none
+}
+
+@media screen and (min-width: 960px) {
+  .page-content {
+    padding-top: var(--nav-height);
+  }
+
+  .page-content.has-sidebar {
+    padding-left: calc(var(--sidebar-width-sm) + 10px);
+  }
+}
+
+@media screen and (min-width: 960px) and (min-width: 1280px) {
+  .page-content.has-sidebar {
+    padding-left: calc(var(--vp-sidebar-width-small) - 6px);
+  }
+}
+
+@media screen and (min-width: 960px) and (min-width: 1440px) {
+  .page-content.has-sidebar {
+    padding-left: calc((100% - var(--vp-screen-max-width)) / 2 + var(--vp-sidebar-width-small));
+  }
+}
+
+.custom-block.tip {
+  padding: 8px 16px;
+  background-color: var(--block-tip-bg-color);
+  border-radius: 4px;
+  border-left: 5px solid var(--el-color-primary);
+  margin: 20px 0;
+}
+
+.doc-content-wrapper {
+  --vp-content-width: 800px;
+  padding: 32px 24px 96px;
+}
+
+@media screen and (min-width: 1440px) {
+  .doc-content-wrapper .doc-content-container {
+    width: var(--vp-content-width);
+  }
+
+  .toc-wrapper {
+    display: block;
+  }
+
+  :root {
+    --vp-sidebar-width-small: 234px;
+  }
+}
+
+.example {
+  border: 1px solid var(--border-color);
+  border-radius: var(--el-border-radius-base);
+  padding: 24px;
 }
 </style>

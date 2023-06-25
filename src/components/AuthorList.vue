@@ -1,31 +1,33 @@
 <template>
     <div class="author-list">
-        <h1>主席团</h1>
-        <div class="author-list-wrapper user-list custom-loading-svg" v-loading="loading" :element-loading-svg="svg"
-            element-loading-svg-view-box="-10, -10, 50, 50">
-            <div v-for="author in authors" v-bind:key="author.id" class="user-card">
-                <div class="avatar">
-                    <el-tooltip :content="author.title" raw-content>
-                        <img :src="author.avatar" v-on:click="triggerSearch(author)" :alt="author.title"
-                            onerror="this.src='https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18110103.png?x-oss-process=image/resize,h_50,w_50'" />
-
-                    </el-tooltip>
-                </div>
-                <a class="username" :href="author.link" target="_blank">{{ author.title }}</a>
-            </div>
-            <div class="user-card">
-                <div class="avatar">
-                    <a href="https://t.me/Odinluo" target="_blank">
-                        <el-tooltip raw-content content="联系我，添加你的RSS">
-                            <svg t="1687231539522" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="2335" width="50" height="50">
-                                <path
-                                    d="M512 936.915619c-234.672764 0-424.915619-190.243879-424.915619-424.915619S277.327236 87.083357 512 87.083357c234.676857 0 424.916643 190.243879 424.916643 424.915619S746.676857 936.915619 512 936.915619zM724.45781 469.50414 554.491767 469.50414 554.491767 299.546284l-84.983533 0 0 169.957857L299.54219 469.50414l0 84.99172 169.966043 0 0 169.966043 84.983533 0L554.491767 554.49586l169.966043 0L724.45781 469.50414z"
-                                    p-id="2336"></path>
-                            </svg>
+        <div class="doc-content-wrapper">
+            <h1>主席团</h1>
+            <div class="author-list-wrapper user-list custom-loading-svg" v-loading="loading" :element-loading-svg="svg"
+                element-loading-svg-view-box="-10, -10, 50, 50">
+                <div v-for="author in authors" v-bind:key="author.id" class="user-card">
+                    <div class="avatar">
+                        <el-tooltip :content="author.title" raw-content>
+                            <img :src="author.avatar" v-on:click="triggerSearch(author)" :alt="author.title"
+                                onerror="this.src='https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18110103.png?x-oss-process=image/resize,h_50,w_50'" />
 
                         </el-tooltip>
-                    </a>
+                    </div>
+                    <a class="username" :href="author.link" target="_blank">{{ author.title }}</a>
+                </div>
+                <div class="user-card">
+                    <div class="avatar">
+                        <a href="https://t.me/Odinluo" target="_blank">
+                            <el-tooltip raw-content content="联系我，添加你的RSS">
+                                <svg t="1687231539522" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="2335" width="50" height="50">
+                                    <path
+                                        d="M512 936.915619c-234.672764 0-424.915619-190.243879-424.915619-424.915619S277.327236 87.083357 512 87.083357c234.676857 0 424.916643 190.243879 424.916643 424.915619S746.676857 936.915619 512 936.915619zM724.45781 469.50414 554.491767 469.50414 554.491767 299.546284l-84.983533 0 0 169.957857L299.54219 469.50414l0 84.99172 169.966043 0 0 169.966043 84.983533 0L554.491767 554.49586l169.966043 0L724.45781 469.50414z"
+                                        p-id="2336"></path>
+                                </svg>
+
+                            </el-tooltip>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,7 +56,7 @@ export default {
         }
     },
     created() {
-        axios.get('https://rsssquare.qiangtu.com/api/author', {
+        axios.get('/api/author', {
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
@@ -95,6 +97,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.author-list .doc-content-wrapper {
+    padding-bottom: 0px;
 }
 
 .user-card {

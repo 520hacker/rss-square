@@ -23,17 +23,38 @@
                 <aside>
                     <div class="sidebar-groups">
                         <section class="sidebar-group">
-                            <p class="sidebar-group__title">数据</p>
+                            <p class="sidebar-group__title">MEMOS</p>
                             <a class="link" v-on:click="hideSideMenu">
-                                <p class="link-text">主席团</p>
+                                <p class="link-text">当日</p>
+                            </a>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">搜索</p>
+                            </a>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">回顾</p>
+                            </a>
+                        </section>
+                        <section class="sidebar-group">
+                            <p class="sidebar-group__title">广场</p>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">订阅</p>
                             </a>
                             <a class="link" v-on:click="hideSideMenu">
                                 <p class="link-text">更新</p>
                             </a>
                         </section>
                         <section class="sidebar-group">
-                            <p class="sidebar-group__title">配置</p>
+                            <p class="sidebar-group__title">助理</p>
                             <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">对话</p>
+                            </a>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">绘图</p>
+                            </a>
+                        </section>
+                        <section class="sidebar-group">
+                            <p class="sidebar-group__title">配置</p>
+                            <a class="link" v-on:click="showSettingCard">
                                 <p class="link-text">账户</p>
                             </a>
                         </section>
@@ -45,7 +66,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, inject, onMounted, onBeforeUnmount } from 'vue';
 
 export default {
     name: 'PageMenu',
@@ -55,15 +76,25 @@ export default {
         const isOverlayShow = ref(false);
         // const showOverlay = inject('showOverlay');
 
+        const changeDisplayView = inject('changeDisplayView');
+        const displaySideMenu = inject('displaySideMenu');
+        const showSettingCard = () => {
+            hideSideMenu();
+            changeDisplayView.value = 'SettingCard';
+        };
+
         const handleScroll = () => {
             showButton.value = window.scrollY > 30;
         };
 
         const showSideMenu = () => {
+            displaySideMenu.vShow = true;
             isOverlayShow.value = true;
             isShowSideMenu.value = true;
         };
+
         const hideSideMenu = () => {
+            displaySideMenu.vShow = false;
             isOverlayShow.value = false;
             isShowSideMenu.value = false;
         };
@@ -102,6 +133,8 @@ export default {
         });
 
         return {
+            showSettingCard,
+            changeDisplayView,
             showButton,
             scrollToTop,
             showSideMenu,
@@ -113,6 +146,10 @@ export default {
 };
 </script> 
 <style>
+.link {
+    cursor: pointer;
+}
+
 .sub-nav {
     border-bottom: 1px solid var(--border-color);
     background-color: var(--bg-color);
@@ -257,7 +294,7 @@ export default {
 @media screen and (min-width: 960px) {
     .sidebar {
         top: var(--header-height);
-        /* transform: translate(0) */
+        transform: translate(0)
     }
 }
 

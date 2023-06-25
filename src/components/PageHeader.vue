@@ -70,7 +70,6 @@
                             class="hamburger-3"></span></button>
                 </div>
             </div>
-
         </div>
     </header>
 </template>

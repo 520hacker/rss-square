@@ -1,41 +1,34 @@
 <template>
     <div class="card-list">
-        <h1>更新 <span class="filter-from" v-show="searchRss != null" v-on:click="removeFilterFrom">来自: {{ searchRss? searchRss.title : ""
-        }}</span>
-        </h1>
-        <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="grid custom-loading-svg"
-            v-loading="loading" :element-loading-svg="svg" element-loading-svg-view-box="-10, -10, 50, 50"
-            v-infinite-scroll="load">
-            <div v-masonry-tile class="item box" v-for="item in blocks" v-bind:key="item.id">
-                <div class="image" v-if="item.image != null">
-                    <el-image :src="item.image" :zoom-rate="1.2" :preview-src-list="item.images" :initial-index="4"
-                        fit="cover" onerror="this.style.display='none'" />
-                </div>
-                <div class="author">{{ item.author }}</div>
-                <div class="description" v-html="item.description"></div>
-                <div class="action-bar">
-                    <DateInfo :pubDate="item.pubDate" />
-                    <a :href="item.link" target="_blank" class="open-link">
-                        <el-icon size="12" color="#000000">
-                            <Connection />
-                        </el-icon>
-                        查看
-                    </a>
+        <div class="doc-content-wrapper">
+            <h1>更新
+                <span class="filter-from" v-show="searchRss != null" v-on:click="removeFilterFrom">来自:
+                    {{ searchRss ? searchRss.title : "" }}
+                </span>
+            </h1>
+            <div v-masonry transition-duration="0.3s" item-selector=".item" class="v-masonry grid custom-loading-svg"
+                v-loading="loading" :element-loading-svg="svg" element-loading-svg-view-box="-10, -10, 50, 50"
+                v-infinite-scroll="load">
+                <div v-masonry-tile class="item box" v-for="item in blocks" v-bind:key="item.id">
+                    <div class="image" v-if="item.image != null">
+                        <el-image :src="item.image" :zoom-rate="1.2" :preview-src-list="item.images" :initial-index="4"
+                            fit="cover" onerror="this.style.display='none'" />
+                    </div>
+                    <div class="author">{{ item.author }}</div>
+                    <div class="description" v-html="item.description"></div>
+                    <div class="action-bar">
+                        <DateInfo :pubDate="item.pubDate" />
+                        <a :href="item.link" target="_blank" class="open-link">
+                            <el-icon size="12" color="#000000">
+                                <Connection />
+                            </el-icon>
+                            查看
+                        </a>
+                    </div>
                 </div>
             </div>
+            <div v-show="loading" class="loading_bar">加载中...</div>
         </div>
-        <div v-show="loading" class="loading_bar">加载中...</div>
-        <!-- <el-dialog v-model="dialogVisible" title="Tips" width="30%" destroy-on-close>
-            <span>This is a message</span>
-            <template #footer>
-                <span class="dialog-footer">
-                    <el-button @click="dialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="dialogVisible = false">
-                        Confirm
-                    </el-button>
-                </span>
-            </template>
-        </el-dialog> -->
     </div>
 </template>
   
@@ -72,7 +65,7 @@ export default {
             page.value = page.value + 1;
             loading.value = true;
             var rssUrl = searchRss.value == null ? "" : searchRss.value.rss;
-            axios.get('https://rsssquare.qiangtu.com/api/rss?source=' + rssUrl + '&page=' + page.value, {
+            axios.get('/api/rss?source=' + rssUrl + '&page=' + page.value, {
                 headers: {
                     'Access-Control-Allow-Origin': '*'
                 }
@@ -146,6 +139,15 @@ export default {
 <style>
 .card-list {
     padding-top: 20px;
+}
+
+.card-list .doc-content-wrapper{
+    display: block;
+    padding-bottom: 0px;
+}
+
+.v-masonry {
+    margin-bottom: 100px;
 }
 
 h1 span.filter-from {
