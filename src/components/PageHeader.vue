@@ -3,9 +3,13 @@
         <div class="navbar-wrapper">
             <div class="header-container">
                 <div class="logo-container">
-                    <div class="logo-container"><a href="/#"><img class="logo"
+                    <div class="logo-container">
+                        <!-- <a href="/#"></a> -->
+                        <!-- <img class="logo"
                                 src="https://memosfile.qiangtu.com/picgo/assets/2023/06/18202306_18014611.png?x-oss-process=image/resize,h_28,w_114"
-                                alt="Memos RSS square Logo"></a></div>
+                                alt="Memos RSS square Logo"> -->
+                        <strong>TWO API</strong>
+                    </div>
                 </div>
                 <div class="content">
                     <div id="docsearch" class="algolia-search-box search" v-show="false">
@@ -33,10 +37,18 @@
                             </span>
                         </button>
                     </div>
-                    <nav class="navbar-menu menu">
-                        <a class="link-item link is-menu-link active" href="#">广场</a>
-                        <a class="link-item link is-menu-link" href="https://memos.qiangtu.com/" target="_blank">Memos</a>
-                        <a class="link-item link is-menu-link" href="https://chatgpt.qiangtu.com/" target="_blank">GPT</a>
+                    <nav class="navbar-menu menu"> 
+                        <router-link to="/"
+                            :class="'link-item link is-menu-link ' + (pathname == '/' ? 'active' : '')">首页</router-link>
+                        <!-- <router-link to="/contact" class="link-item link is-menu-link">联系</router-link>
+                        <router-link to="/about" class="link-item link is-menu-link">关于</router-link> -->
+                        <router-link to="/login" class="link-item link is-menu-link" v-if="!logged">登录</router-link>
+                        <router-link to="javascript:void(0)" class="link-item link is-menu-link" v-if="logged"
+                            @click.prevent="logout">登出</router-link>
+
+                        <!-- <a class="link-item link is-menu-link active" href="#">渠道</a>
+                        <a class="link-item link is-menu-link" href="#"  >令牌</a>
+                        <a class="link-item link is-menu-link" href="#" >日志</a> -->
                     </nav>
                     <div class="theme-toggler-content theme-toggler">
                         <button class="switch" role="switch" aria-label="切换暗色主题" aria-checked="false"
@@ -55,9 +67,9 @@
                             </div>
                         </button>
                     </div>
-                    <div class="social-links">
-                        <a href="https://github.com/520hacker/rss-square" title="GitHub" target="_blank"
-                            rel="noreferrer noopener" class="social-link">
+                    <div class="social-links" v-if="false">
+                        <a href="https://github.com/520hacker" title="GitHub" target="_blank" rel="noreferrer noopener"
+                            class="social-link">
                             <i class="el-icon" style="font-size:24px;">
                                 <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em">
                                     <path fill="currentColor"
@@ -65,7 +77,7 @@
                                     </path>
                                 </svg></i></a>
                     </div>
-                    <button class="reset-btn menu-hamburger hamburger" aria-label="移动端导航" aria-expanded="false"
+                    <button class="reset-btn menu-hamburger hamburger" aria-label="移动端导航" aria-expanded="false" v-if="false"
                         aria-controls="full-screen"><span class="hamburger-1"></span><span class="hamburger-2"></span><span
                             class="hamburger-3"></span></button>
                 </div>
@@ -75,7 +87,9 @@
 </template>
   
 <script>
-import { inject } from 'vue';
+import { useRouter } from 'vue-router';
+import { inject, ref, h } from 'vue';
+import { ElMessageBox } from 'element-plus'
 
 export default {
     name: 'PageHeader',
@@ -90,19 +104,54 @@ export default {
             } else {
                 document.documentElement.classList.remove('dark');
             }
-        }
+        },
+
     },
     setup() {
+        const pathname = ref('/');
+        const logged = ref(false);
+        const router = useRouter();
+        const logout = () => {
+            localStorage.removeItem('SK');
+            localStorage.removeItem('Role');
+            ElMessageBox({
+                title: '成功',
+                message: h('p', null, [
+                    h('span', null, '已退出登录'),
+                ]),
+                callback: () => {
+                    router.push('/login');
+                }
+            })
+        }
+
+
+        const isLogged = () => {
+            let key = localStorage.getItem("SK");
+            if (key && key.length > 0 && key != "") {
+                return true
+            }
+
+            return false
+        }
+
         const sharedState = inject('sharedState');
 
         // 触发组件B的方法C
         const triggerSearch = () => {
             sharedState.triggerSearch();
         };
+
+        setInterval(function () {
+            logged.value = isLogged()
+            pathname.value = this.window.location.pathname
+        }, 1000)
+
         return {
-            // injectedMessage,
-            // updateMessage,
-            triggerSearch
+            pathname,
+            logged,
+            triggerSearch,
+            logout
         };
     }
 }
@@ -547,7 +596,7 @@ button.reset-btn {
     color: var(--text-color);
     transition: border-color var(--el-transition-duration), background-color var(--el-transition-duration-fast);
     background-color: transparent;
-    display: none;
+    display: flex;
     border-radius: 50%;
     height: 24px;
     padding: 0 12px
