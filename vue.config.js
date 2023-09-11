@@ -1,25 +1,24 @@
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
-  transpileDependencies: true, 
+  transpileDependencies: true,
   devServer: {
     proxy: {
-      '/api/twoapi/': {
-        target: 'http://localhost:5000',
-        // target: process.env.BASE_URL,
+      '/api/rss/': {
+        target: process.env.RSS_API_HOST,
         changeOrigin: true,
         pathRewrite: {
-          '^/twoapi': ''
+          '^/api/rss': ''
         }
       },
-      '/api/public/': {
-        target: 'http://localhost:5000',
-        // target: process.env.BASE_URL,
+      '/api/memos/': {
+        target: process.env.MEMOS_API_HOST,
         changeOrigin: true,
         pathRewrite: {
-          '^/public': ''
+          '^/api/memos': ''
         }
       },
     }
   }
-}) 
+})
+

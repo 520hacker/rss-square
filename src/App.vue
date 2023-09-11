@@ -1,17 +1,20 @@
 <template>
-  <PageHeader msg="Welcome!" /> 
+  <PageHeader msg="Welcome to RSS Square App" />
+  <!-- <div>{{ searchKey }}</div> -->
   <PageMenu />
-  <main id="page-content" :class="displaySideMenu ? 'page-content ' : 'page-content has-sidebar'"> 
-    <router-view></router-view> 
+  <main id="page-content" :class="displaySideMenu ? 'page-content ' : 'page-content has-sidebar'">
+    <SettingCard v-show="displayView == 'SettingCard'" />
+    <AuthorList msg="Welcome to RSS Square App" v-show="displayView == 'CardList'" />
+    <CardList :msg="searchKey" v-show="displayView == 'CardList'" />
   </main>
 </template>
 
 <script>
 import PageHeader from './components/PageHeader.vue'
 import PageMenu from './components/PageMenu.vue'
-// import AuthorList from './components/AuthorList.vue'
-// import CardList from './components/CardList.vue'
-// import SettingCard from './components/optionCard.vue'
+import AuthorList from './components/AuthorList.vue'
+import CardList from './components/CardList.vue'
+import SettingCard from './components/SettingCard.vue'
 import { provide, reactive, ref } from 'vue';
 
 export default {
@@ -19,9 +22,9 @@ export default {
   components: {
     PageHeader,
     PageMenu,
-    // AuthorList,
-    // CardList,
-    // SettingCard
+    AuthorList,
+    CardList,
+    SettingCard
   },
 
   setup() {
@@ -223,9 +226,9 @@ body {
   --header-height: 55px;
   --nav-height: 55px;
   --vp-screen-max-width: 1362px;
-  --vp-sidebar-width-mobile: 220px;
-  --vp-sidebar-width-small: 166px;
-  --sidebar-width-sm: 10rem;
+  --vp-sidebar-width-mobile: 320px;
+  --vp-sidebar-width-small: 266px;
+  --sidebar-width-sm: 16rem;
   --sidebar-width-xs: 20rem;
   --content-min-width: 16rem;
   --content-max-width: 48rem;
@@ -321,7 +324,7 @@ h6:first-child {
 }
 
 .doc-content-wrapper {
-  --vp-content-width: 950px;
+  --vp-content-width: 800px;
   padding: 32px 24px 96px;
 }
 
@@ -418,7 +421,7 @@ textarea {
 }
 
 .doc-content-wrapper {
-  --vp-content-width: 950px;
+  --vp-content-width: 800px;
   padding: 32px 24px 96px;
 }
 
@@ -432,7 +435,7 @@ textarea {
   }
 
   :root {
-    --vp-sidebar-width-small: 134px;
+    --vp-sidebar-width-small: 234px;
   }
 }
 

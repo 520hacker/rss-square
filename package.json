@@ -1,8 +1,8 @@
 {
-  "name": "two-api",
+  "name": "rss-square",
   "version": "1.0.0",
   "private": true,
-  "description": "its a chat AI proxy service.",
+  "description": "its a rss square and load data from rss-json api.",
   "author": {
     "name": "odin luo"
   },
@@ -23,8 +23,7 @@
     "mitt": "^3.0.0",
     "node-fetch": "^3.3.1",
     "vue": "^3.2.13",
-    "vue-masonry": "^0.16.0",
-    "vue-router": "^4.0.13"
+    "vue-masonry": "^0.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -55,11 +54,11 @@
     "not dead",
     "not ie 11"
   ],
-  "_id": "two-api@1.0.0",
+  "_id": "rss-square@1.0.0",
   "bugs": {
-    "url": "https://github.com/520hacker/two-api/issues"
+    "url": "https://github.com/520hacker/rss-square/issues"
   },
-  "homepage": "https://github.com/520hacker/two-api#readme",
+  "homepage": "https://github.com/520hacker/rss-square#readme",
   "keywords": [
     "rss",
     "square",
@@ -72,6 +71,6 @@
   "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/520hacker/two-api.git"
+    "url": "git+https://github.com/520hacker/rss-square.git"
   }
 }

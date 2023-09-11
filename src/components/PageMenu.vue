@@ -1,5 +1,5 @@
 <template>
-    <div class="overlay" v-show="isOverlayShow" @click="hideSideMenu"></div>
+    <div class="overlay" v-show="isOverlayShow" v-on:click="hideSideMenu"></div>
     <div class="sub-nav py-3 flex items-center">
         <button class="reset-btn sidebar-button flex items-center" aria-expanded="false" v-on:click="showSideMenu">
             <i class="el-icon mr-2" style="font-size: 20px;">
@@ -23,31 +23,40 @@
                 <aside>
                     <div class="sidebar-groups">
                         <section class="sidebar-group">
-                            <p class="sidebar-group__title">AI</p>
-                            <router-link to="/channels" class="link" v-show="isAdmin">
-                                <p class="link-text">渠道</p>
-                            </router-link>
-                            <router-link to="/tokens" class="link">
-                                <p class="link-text">令牌</p>
-                            </router-link>
-                            <router-link to="/logs" class="link">
-                                <p class="link-text">日志</p>
-                            </router-link>
+                            <p class="sidebar-group__title">MEMOS</p>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">当日</p>
+                            </a>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">搜索</p>
+                            </a>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">回顾</p>
+                            </a>
                         </section>
-                        <section class="sidebar-group" v-if="isAdmin">
-                            <p class="sidebar-group__title">管理</p>
-                            <router-link to="/users" class="link">
-                                <p class="link-text">用户</p>
-                            </router-link>
+                        <section class="sidebar-group">
+                            <p class="sidebar-group__title">广场</p>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">订阅</p>
+                            </a>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">更新</p>
+                            </a>
                         </section>
-                        <section class="sidebar-group" v-if="isAdmin">
+                        <section class="sidebar-group">
+                            <p class="sidebar-group__title">助理</p>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">对话</p>
+                            </a>
+                            <a class="link" v-on:click="hideSideMenu">
+                                <p class="link-text">绘图</p>
+                            </a>
+                        </section>
+                        <section class="sidebar-group">
                             <p class="sidebar-group__title">配置</p>
-                            <router-link to="/option" class="link">
-                                <p class="link-text">倍率</p>
-                            </router-link>
-                            <router-link to="/content/edit" class="link">
-                                <p class="link-text">内容</p>
-                            </router-link>
+                            <a class="link" v-on:click="showSettingCard">
+                                <p class="link-text">账户</p>
+                            </a>
                         </section>
                     </div>
                 </aside>
@@ -65,19 +74,7 @@ export default {
         const isShowSideMenu = ref(false);
         const showButton = ref(false);
         const isOverlayShow = ref(false);
-        const isAdmin = ref(false)
-
-        const onLoad = () => {
-            setInterval(function () {
-                let role = localStorage.getItem('Role')
-                if (role && role == 1) {
-                    isAdmin.value = true
-                } else {
-                    isAdmin.value = false
-                }
-            }, 500)
-        }
-        onLoad()
+        // const showOverlay = inject('showOverlay');
 
         const changeDisplayView = inject('changeDisplayView');
         const displaySideMenu = inject('displaySideMenu');
@@ -85,7 +82,6 @@ export default {
             hideSideMenu();
             changeDisplayView.value = 'SettingCard';
         };
-
 
         const handleScroll = () => {
             showButton.value = window.scrollY > 30;
@@ -144,29 +140,14 @@ export default {
             showSideMenu,
             hideSideMenu,
             isOverlayShow,
-            isShowSideMenu,
-            isAdmin
+            isShowSideMenu
         };
     }
 };
 </script> 
 <style>
-.sidebar-groups .link {
+.link {
     cursor: pointer;
-    display: block;
-    padding: 10px 16px;
-    line-height: 1.5;
-    font-size: .9rem;
-    border-radius: 8px;
-}
-
-.sidebar-groups .link-text {
-    line-height: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-color-light);
-    transition: color .5s;
-    margin: 0;
 }
 
 .sub-nav {
